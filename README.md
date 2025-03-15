@@ -53,6 +53,8 @@ pnpm run dev
 
 ### 📊 ERD 다이어그램
 
+![ERD 다이어그램](https://gxzwdcgjtorzehmxxqar.supabase.co/storage/v1/object/public/inflearn//myreel_erd_diagram.png)
+
 ### 📂 폴더 구조
 
 ### 🎯 적용한 패턴
