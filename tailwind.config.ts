@@ -9,6 +9,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      maxWidth: {
+        '3xl': '56rem',
+        '4xl': '80rem',
+      },
       fontFamily: {
         righteous: ['Righteous', 'cursive'],
         noto: ['Noto Sans', 'sans-serif'],
@@ -76,7 +80,7 @@ const config: Config = {
       addUtilities({
         '.transition-hover:hover': {
           boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-          transition: 'all 0.1s ease-in-out 0.1s',
+          transition: 'all 0.2s ease-in-out 0.2s',
         },
       })
     }),

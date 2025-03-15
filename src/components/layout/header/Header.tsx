@@ -4,7 +4,7 @@ import SearchInput from './SearchInput'
 
 export default function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 px-4 py-3 bg-gray-800 flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 px-4 py-3 bg-gray-800 flex items-center justify-between z-50">
       <nav className="flex items-center gap-4 text-white">
         <LogoLink className="text-red-500 text-2xl" />
         <NavList />
