@@ -71,16 +71,12 @@ const config: Config = {
     },
   },
   plugins: [
-    plugin(function ({ addUtilities }) {
+    plugin(function ({ addVariant, addUtilities }) {
+      addVariant('focus-within', '&:focus-within')
       addUtilities({
-        '.transition-focus:focus': {
-          outline: 'none',
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-          transition: 'all 0.15s ease-in-out',
-        },
         '.transition-hover:hover': {
           boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-          transition: 'all 0.15s linear',
+          transition: 'all 0.1s ease-in-out 0.1s',
         },
       })
     }),

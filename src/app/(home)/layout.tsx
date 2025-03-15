@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { Noto_Sans_KR } from 'next/font/google'
 import ReactQueryClientProvider from '@/providers/ReactQueryClientProvider'
-import './globals.css'
+import Layout from '@/components/layout/Layout'
+import '../globals.css'
 
 const notoSansKR = Noto_Sans_KR({
   weight: ['300', '500', '700', '900'],
@@ -31,7 +32,9 @@ export default function RootLayout({
         />
       </head>
       <ReactQueryClientProvider>
-        <body className={`${notoSansKR.className} antialiased w-full`}>{children}</body>
+        <body className={`${notoSansKR.className} antialiased w-full`}>
+          <Layout>{children}</Layout>
+        </body>
       </ReactQueryClientProvider>
     </html>
   )
