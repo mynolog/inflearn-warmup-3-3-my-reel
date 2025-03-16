@@ -9,4 +9,4 @@ export const ROUTES = {
 export const API_ENDPOINTS = {
   MOVIES: '/api/movies',
   MOVIE_DETAIL: (slug: MovieRow['slug']) => `/api/movies/${slug}`,
-}
+} as const

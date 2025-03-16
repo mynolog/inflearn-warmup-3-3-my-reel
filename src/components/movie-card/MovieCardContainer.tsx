@@ -1,6 +1,7 @@
 'use client'
 
 import type { MovieRow } from '@/types/movies'
+import { useState } from 'react'
 import MovieCard from './MovieCard'
 
 interface MovieCardContainerProps {
@@ -8,5 +9,8 @@ interface MovieCardContainerProps {
 }
 
 export default function MovieCardContainer({ movie }: MovieCardContainerProps) {
-  return <MovieCard movie={movie} />
+  // 개별 이미지 로딩 상태
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  return <MovieCard movie={movie} isLoaded={isLoaded} onLoad={() => setIsLoaded(true)} />
 }
