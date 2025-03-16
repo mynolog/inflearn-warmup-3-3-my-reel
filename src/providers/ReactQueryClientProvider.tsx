@@ -1,9 +1,19 @@
 'use client'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
-export const queryClient = new QueryClient({})
+import { useRef } from 'react'
 
 export default function ReactQueryClientProvider({ children }: React.PropsWithChildren) {
-  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  const queryClientRef = useRef(
+    new QueryClient({
+      defaultOptions: {
+        queries: {
+          staleTime: 1000 * 60 * 30, // ✅ 30분 캐싱
+          refetchOnWindowFocus: false,
+        },
+      },
+    }),
+  )
+
+  return <QueryClientProvider client={queryClientRef.current}>{children}</QueryClientProvider>
 }
