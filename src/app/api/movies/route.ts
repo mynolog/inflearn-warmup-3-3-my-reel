@@ -2,13 +2,21 @@ import { NextResponse } from 'next/server'
 import { createServerSupabaseClient } from '@/utils/supabase/server'
 import { TABLES } from '@/constants/supabase'
 
-export async function GET() {
+export async function GET(request: Request) {
   const supabase = await createServerSupabaseClient()
 
-  const { data: movies, error } = await supabase
-    .from(TABLES.MOVIES)
-    .select('*')
-    .order('order_index', { ascending: true })
+  const { searchParams } = new URL(request.url)
+  const searchQuery = searchParams.get('query') || ''
+
+  let query = supabase.from(TABLES.MOVIES).select('*')
+
+  if (searchQuery) {
+    query = query.ilike('title', `%${searchQuery}%`)
+  } else {
+    query = query.order('order_index', { ascending: true })
+  }
+
+  const { data: movies, error } = await query
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 })

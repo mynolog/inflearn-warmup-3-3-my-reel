@@ -1,15 +1,18 @@
 'use client'
 
-import { useMovies } from '@/hooks/useMovies'
-import MovieCard from '../movie-card/MovieCard'
+import type { MovieRow } from '@/types/movies'
+import MovieCardContainer from '../movie-card/MovieCardContainer'
 
-export default function MovieCardList() {
-  const { data: movies = [], isLoading } = useMovies()
+interface MovieCardListProps {
+  movies: MovieRow[]
+  isLoading: boolean
+}
 
+export default function MovieCardList({ movies, isLoading }: MovieCardListProps) {
   return (
     <ul className="w-full h-full gap-1 grid grid-cols-3 md:grid-cols-4">
       {isLoading && <div>Loading...</div>}
-      {movies && movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
+      {movies && movies.map((movie) => <MovieCardContainer key={movie.id} movie={movie} />)}
     </ul>
   )
 }

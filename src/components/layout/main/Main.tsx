@@ -1,9 +1,9 @@
-import MovieCardList from '@/components/movie-card-list/MovieCardList'
+import MovieCardListContainer from '@/components/movie-card-list/MovieCardListContainer'
 
 export default function Main() {
   return (
     <div className="">
-      <MovieCardList />
+      <MovieCardListContainer />
     </div>
   )
 }
