@@ -16,12 +16,24 @@ export default function MovieDetail({ movie }: MovieDetailProps) {
       <div className="w-full md:w-2/3 flex flex-col px-6 gap-4">
         <h2 className="text-3xl font-extrabold">{movie.title}</h2>
         <p className="text-lg">{movie.overview}</p>
-        <div className="text-lg font-bold">
-          <i className="fas fa-star mr-1" />
-          <span>Vote Average: {movie.vote_average}</span>
+        <div className="overflow-hidden rounded-lg border-2 border-gray-300">
+          <table className="w-full border-collapse">
+            <tbody>
+              <tr className="border-b">
+                <td className="p-2 font-bold">⭐ Vote Average</td>
+                <td className="p-2">{movie.vote_average}</td>
+              </tr>
+              <tr className="border-b">
+                <td className="p-2 font-bold">🔥 Popularity</td>
+                <td className="p-2">{movie.popularity}</td>
+              </tr>
+              <tr>
+                <td className="p-2 font-bold">📅 Release Date</td>
+                <td className="p-2">{movie.release_date}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div className="text-lg font-bold">Popularity: {movie.popularity}</div>
-        <div className="text-lg font-bold">Release Data: {movie.release_date}</div>
       </div>
     </div>
   )

@@ -12,12 +12,7 @@ export default function MovieDetailSkeleton() {
       <div className="w-full md:w-2/3 flex flex-col px-6 gap-5">
         <Skeleton width="75%" height="40px" className="rounded-lg" />
         <Skeleton width="90%" height="150px" className="rounded-lg" />
-        <div className="text-lg font-bold flex items-center gap-2">
-          <Skeleton width="20px" height="20px" className="rounded-full" />
-          <Skeleton width="170px" height="20px" className="rounded-lg" />
-        </div>
-        <Skeleton width="200px" height="20px" className="rounded-lg" />
-        <Skeleton width="200px" height="20px" className="rounded-lg" />
+        <Skeleton width="90%" height="120px" className="rounded-lg" />
       </div>
     </div>
   )
