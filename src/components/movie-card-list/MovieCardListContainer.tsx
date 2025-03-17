@@ -28,7 +28,6 @@ export default function MovieCardListContainer() {
   // 검색이 아닐 경우에만 무한 스크롤 감지
   useEffect(() => {
     if (inView && hasNextPage && !isFetching) {
-      console.log('Fetching next page...')
       moviesQuery.fetchNextPage()
     }
   }, [inView, hasNextPage, isFetching])
