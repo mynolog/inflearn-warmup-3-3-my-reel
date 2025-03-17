@@ -7,8 +7,14 @@ export async function GET(request: Request) {
 
   const { searchParams } = new URL(request.url)
   const searchQuery = searchParams.get('query') || ''
+  const page = Number(searchParams.get('page')) || 1
+  const LIMIT = 12
+  const offset = (page - 1) * LIMIT
 
-  let query = supabase.from(TABLES.MOVIES).select('*')
+  let query = supabase
+    .from(TABLES.MOVIES)
+    .select('*')
+    .range(offset, offset + LIMIT - 1)
 
   if (searchQuery) {
     query = query.ilike('title', `%${searchQuery}%`)
@@ -22,9 +28,18 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
 
-  return NextResponse.json(movies, {
-    headers: {
-      'Cache-Control': 's-maxage=1800, stale-while-revalidate',
+  const { count } = await supabase.from(TABLES.MOVIES).select('*', { count: 'exact', head: true })
+
+  return NextResponse.json(
+    {
+      movies,
+      page,
+      hasNextPage: offset + movies.length < (count || 0),
     },
-  })
+    {
+      headers: {
+        'Cache-Control': 's-maxage=1800, stale-while-revalidate',
+      },
+    },
+  )
 }

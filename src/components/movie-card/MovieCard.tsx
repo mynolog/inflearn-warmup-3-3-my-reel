@@ -24,7 +24,7 @@ export default function MovieCard({ movie, onLoad, isLoaded }: MovieCardProps) {
             width={500}
             height={750}
             alt={movie.slug}
-            onLoadingComplete={onLoad}
+            onLoad={onLoad}
             className={`transition-opacity duration-350 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
           />
         </Link>

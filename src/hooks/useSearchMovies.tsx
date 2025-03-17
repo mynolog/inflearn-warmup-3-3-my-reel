@@ -17,7 +17,13 @@ export function useSearchMovies() {
       const res = await fetch(
         `${baseUrl}${API_ENDPOINTS.MOVIES}?query=${encodeURIComponent(searchQuery)}`,
       )
-      return res.json()
+
+      if (!res.ok) {
+        throw new Error('영화 정보를 불러올 수 없습니다.')
+      }
+
+      const data = await res.json()
+      return data.movies as MovieRow[]
     },
     enabled: !!searchQuery,
   })
