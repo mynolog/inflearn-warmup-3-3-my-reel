@@ -1,12 +1,13 @@
 'use client'
 
+import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useMovies } from '@/hooks/useMovies'
 import { useSearchMovies } from '@/hooks/useSearchMovies'
 import MovieCardList from './MovieCardList'
 import { useSearchStore } from '@/stores/useSearchStore'
 import MovieCardListSkeleton from './MovieCardListSkeleton'
-import { useEffect } from 'react'
+import { LikedMovie } from '@/types/movies'
 
 export default function MovieCardListContainer() {
   const { searchQuery } = useSearchStore()
@@ -30,7 +31,7 @@ export default function MovieCardListContainer() {
     if (inView && hasNextPage && !isFetching) {
       moviesQuery.fetchNextPage()
     }
-  }, [inView, hasNextPage, isFetching])
+  }, [inView, hasNextPage, isFetching, moviesQuery])
 
   // 로딩 중이면 스켈레톤 표시
   if (isLoading) return <MovieCardListSkeleton />
@@ -42,9 +43,29 @@ export default function MovieCardListContainer() {
 
   if (!movies.length) return <div>영화 목록을 불러올 수 없습니다.</div>
 
+  const getLikedMovies = (): LikedMovie[] => {
+    try {
+      const likedMovies: LikedMovie[] = JSON.parse(localStorage.getItem('likedMovies') || '[]')
+      return likedMovies
+    } catch (error) {
+      console.error('Error reading from localStorage:', error)
+      return []
+    }
+  }
+
+  const isMovieLiked = (slug: string) => {
+    const likedMovies = getLikedMovies()
+    return likedMovies.some((movie) => movie.slug === slug)
+  }
+
+  const moviesWithLikeStatus = movies.map((movie) => ({
+    ...movie,
+    isLiked: isMovieLiked(movie.slug),
+  }))
+
   return (
     <>
-      <MovieCardList movies={movies} />
+      <MovieCardList movies={moviesWithLikeStatus} />
       {!isSearching && <div ref={ref} style={{ height: '1px', visibility: 'hidden' }} />}
     </>
   )

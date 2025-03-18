@@ -10,14 +10,12 @@ export async function GET(_: Request, { params }: { params: { slug: string } }) 
     return NextResponse.json({ error: 'Slug is required' }, { status: 400 })
   }
 
-  console.log('Fetching movie with slug:', slug)
-
   const supabase = await createServerSupabaseClient()
   const { data: movie, error } = await supabase
     .from(TABLES.MOVIES)
     .select('*')
     .eq('slug', slug)
-    .maybeSingle()
+    .single()
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 })

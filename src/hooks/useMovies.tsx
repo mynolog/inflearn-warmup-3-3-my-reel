@@ -15,9 +15,6 @@ export function useMovies() {
     },
     getNextPageParam: (lastPage) => (lastPage.hasNextPage ? lastPage.page + 1 : null),
     initialPageParam: 1,
-    staleTime: 1000 * 60 * 30,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-    refetchOnWindowFocus: false,
+    staleTime: 0,
   })
 }

@@ -1,10 +1,10 @@
 'use client'
 
-import type { MovieRow } from '@/types/movies'
+import type { MovieRowWithLikeStatus } from '@/types/movies'
 import MovieCardContainer from '../movie-card/MovieCardContainer'
 
 interface MovieCardListProps {
-  movies: MovieRow[]
+  movies: MovieRowWithLikeStatus[]
 }
 
 export default function MovieCardList({ movies }: MovieCardListProps) {

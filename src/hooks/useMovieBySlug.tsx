@@ -18,9 +18,6 @@ export function useMovieBySlug(slug: MovieRow['slug']) {
       return data
     },
     enabled: !!slug,
-    staleTime: 1000 * 60 * 30,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-    refetchOnWindowFocus: false,
+    staleTime: 0,
   })
 }

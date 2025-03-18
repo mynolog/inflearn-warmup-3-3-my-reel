@@ -14,6 +14,10 @@ export async function GET(request: Request) {
   let query = supabase
     .from(TABLES.MOVIES)
     .select('*')
+    // like_count 많은 순 정렬
+    .order('like_count', { ascending: false })
+    // like_count가 동률일 경우 order_index 낮은 순 정렬
+    .order('order_index', { ascending: true })
     .range(offset, offset + LIMIT - 1)
 
   if (searchQuery) {
@@ -38,7 +42,7 @@ export async function GET(request: Request) {
     },
     {
       headers: {
-        'Cache-Control': 's-maxage=1800, stale-while-revalidate',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
       },
     },
   )

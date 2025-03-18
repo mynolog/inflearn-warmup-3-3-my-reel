@@ -43,6 +43,7 @@ export type Database = {
         Row: {
           id: string
           image_url: string
+          like_count: number
           order_index: number
           overview: string
           popularity: number
@@ -54,6 +55,7 @@ export type Database = {
         Insert: {
           id?: string
           image_url: string
+          like_count?: number
           order_index?: number
           overview: string
           popularity: number
@@ -65,6 +67,7 @@ export type Database = {
         Update: {
           id?: string
           image_url?: string
+          like_count?: number
           order_index?: number
           overview?: string
           popularity?: number
@@ -72,48 +75,6 @@ export type Database = {
           slug?: string
           title?: string
           vote_average?: number
-        }
-        Relationships: []
-      }
-      myreel_user_liked_movies: {
-        Row: {
-          movie_id: string
-          user_id: string
-        }
-        Insert: {
-          movie_id: string
-          user_id: string
-        }
-        Update: {
-          movie_id?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "myreel_user_liked_movies_movie_id_fkey"
-            columns: ["movie_id"]
-            isOneToOne: false
-            referencedRelation: "myreel_movies"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "myreel_user_liked_movies_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "myreel_users"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      myreel_users: {
-        Row: {
-          id: string
-        }
-        Insert: {
-          id?: string
-        }
-        Update: {
-          id?: string
         }
         Relationships: []
       }
@@ -149,7 +110,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_movies_with_like_count: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          movie_slug: string
+          title: string
+          image_url: string
+          like_count: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
