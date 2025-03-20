@@ -2,6 +2,7 @@
 
 import type { MovieRowWithLikeStatus } from '@/types/movies'
 import MovieCardContainer from '../movie-card/MovieCardContainer'
+import ScrollToTopButton from '../common/button/ScrollToTopButton'
 
 interface MovieCardListProps {
   movies: MovieRowWithLikeStatus[]
@@ -9,8 +10,11 @@ interface MovieCardListProps {
 
 export default function MovieCardList({ movies }: MovieCardListProps) {
   return (
-    <ul className="w-full h-full gap-1 grid grid-cols-3 md:grid-cols-4">
-      {movies && movies.map((movie) => <MovieCardContainer key={movie.id} movie={movie} />)}
-    </ul>
+    <>
+      <ul className="w-full h-full gap-1 grid grid-cols-3 md:grid-cols-4">
+        {movies && movies.map((movie) => <MovieCardContainer key={movie.id} movie={movie} />)}
+      </ul>
+      <ScrollToTopButton />
+    </>
   )
 }
