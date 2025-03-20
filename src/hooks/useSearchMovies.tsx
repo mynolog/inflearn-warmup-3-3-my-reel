@@ -14,11 +14,13 @@ export function useSearchMovies() {
     queryKey: [QUERY_KEY.SEARCH_MOVIES, searchQuery],
     queryFn: async (): Promise<MovieRow[]> => {
       if (!searchQuery) return []
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 
-      if (!baseUrl) {
-        throw new Error(CONFIG_ERROR.MISSING_BASE_URL.message)
-      }
+      // fetch 요청 자체를 디바운스 (300ms 대기 후 실행)
+      await new Promise((resolve) => setTimeout(resolve, 300))
+
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+      if (!baseUrl) throw new Error(CONFIG_ERROR.MISSING_BASE_URL.message)
+
       const res = await fetch(
         `${baseUrl}${API_ENDPOINTS.MOVIES}?query=${encodeURIComponent(searchQuery)}`,
       )
@@ -31,5 +33,6 @@ export function useSearchMovies() {
       return data.movies as MovieRow[]
     },
     enabled: !!searchQuery,
+    staleTime: 1000 * 60 * 5,
   })
 }
