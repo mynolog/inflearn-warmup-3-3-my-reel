@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { LikedMovie, MovieRow } from '@/types/movies'
 import { API_ENDPOINTS } from '@/constants/routes'
 import { LikeMovieResponseDTO } from '@/dto/movie'
+import { CLIENT_ERROR, CONFIG_ERROR } from '@/constants/error'
 
 export function useLikeMovie(slug: string, initialLikeCount: MovieRow['like_count']) {
   const [likeCount, setLikeCount] = useState(initialLikeCount)
@@ -10,7 +11,7 @@ export function useLikeMovie(slug: string, initialLikeCount: MovieRow['like_coun
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 
   if (!baseUrl) {
-    throw new Error('baseUrl이 없습니다.')
+    throw new Error(CONFIG_ERROR.MISSING_BASE_URL.message)
   }
 
   // 컴포넌트가 마운트될 때, 로컬 스토리지에서 좋아요 상태 초기화
@@ -38,7 +39,7 @@ export function useLikeMovie(slug: string, initialLikeCount: MovieRow['like_coun
       })
 
       if (!res.ok) {
-        throw new Error('Failed to like the movie')
+        throw new Error(CLIENT_ERROR.MOVIE_LIKE_FAILED.message)
       }
 
       const data: LikeMovieResponseDTO = await res.json()
@@ -72,7 +73,7 @@ export function useLikeMovie(slug: string, initialLikeCount: MovieRow['like_coun
       })
 
       if (!res.ok) {
-        throw new Error('Failed to unlike the movie')
+        throw new Error(CLIENT_ERROR.MOVIE_UNLIKE_FAILED.message)
       }
 
       const data: LikeMovieResponseDTO = await res.json()

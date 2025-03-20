@@ -16,3 +16,8 @@ export const ERROR_RESPONSE = {
 export const CONFIG_ERROR = {
   MISSING_BASE_URL: { status: 500, message: '환경 변수 설정 오류: BASE_URL 없음' },
 } as const
+
+export const CLIENT_ERROR = {
+  MOVIE_LIKE_FAILED: { message: '좋아요를 반영할 수 없습니다. 잠시 후 다시 시도해주세요.' },
+  MOVIE_UNLIKE_FAILED: { message: '좋아요 취소를 반영할 수 없습니다. 잠시 후 다시 시도해주세요.' },
+}
