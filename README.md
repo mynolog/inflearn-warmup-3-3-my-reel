@@ -21,6 +21,7 @@
 4. 영화 검색 기능
 
 - Header내 검색창을 통해 영화 제목으로 관련 영화 목록을 검색할 수 있음
+- 검색 결과 없을 경우, 좋아요 많은 영화 추천 리스트 제공
 
 ### 🛠️ 설치 방법
 
@@ -39,9 +40,9 @@ pnpm run dev
 
 ### 🎥 데모 영상
 
-<!-- #### 👉 [유튜브 링크](https://www.youtube.com/watch?v=unFhnRKPQY0) -->
+#### 👉 [유튜브 링크](https://www.youtube.com/watch?v=o5BwgEixAbE)
 
-<!-- [![유튜브 썸네일](https://img.youtube.com/vi/unFhnRKPQY0/0.jpg)](https://www.youtube.com/watch?v=unFhnRKPQY0) -->
+[![유튜브 썸네일](https://img.youtube.com/vi/o5BwgEixAbE/0.jpg)](https://www.youtube.com/watch?v=o5BwgEixAbE)
 
 ### 🚀 배포 링크
 
@@ -87,6 +88,29 @@ pnpm run dev
 
 ### 📂 폴더 구조
 
+```
+/src
+ ├── app               # Next.js App Router 기반 페이지 & 레이아웃
+ ├── components        # UI 컴포넌트
+ │   ├── layout        # 페이지 레이아웃 컴포넌트 (page.tsx에서 사용)
+ │   ├── common        # 공통 UI 컴포넌트
+ ├── constants         # 프로젝트 상수
+ ├── dto               # API 요청/응답 데이터를 정의하는 타입 또는 인터페이스 모음
+ ├── hooks             # 커스텀 훅
+ ├── providers         # Next.js 전역 프로바이더
+ ├── stores            # 전역 상태 관리 스토어
+ ├── types             # TypeScript 타입 정의
+ ├── utils             # 유틸 함수 (파일명 변환, 시간 포맷 등)
+```
+
+### 🛠 API 엔드포인트
+
+- `GET /api/movies` → 전체 영화 목록 조회
+- `GET /api/movies/most-liked` → 좋아요 많은 순 상위 6개 영화 목록 조회
+- `GET /api/movies/:slug` → 특정 영화 정보 조회
+- `POST /api/movies/:slug/like` → 영화 좋아요 등록
+- `POST /api/movies/:slug/unlike` → 영화 좋아요 취소
+
 ### 🎯 적용한 패턴
 
 - `Container-Presentational Component 패턴`
@@ -117,6 +141,3 @@ pnpm run dev
 | **문제 상황** | 유저 식별 없이 **클라이언트에서 로컬스토리지**로 좋아요 상태를 관리하는 경우 발생할 수 있는 문제점                                                        |
 | **원인**      | 서버에서 **유저 식별**이 불가능하고, **클라이언트**에서만 좋아요 상태를 관리하기 때문                                                                     |
 | **해결 방향** | **로컬스토리지**로 좋아요 상태를 관리하며, **서버에서 좋아요 수만 업데이트**, Nextjs API는 `api/movies/:slug/like`, `api/movies/:slug/unlike` 별도로 관리 |
-| **장점**      | 클라이언트에서 실시간으로 상태를 반영하고, 서버에 불필요한 요청을 줄여 효율성 증가                                                                        |
-| **단점**      | - **기기 간 동기화 불가**: 다른 브라우저나 기기에서 좋아요 상태를 복원할 수 없음                                                                          |
-|               | - **서버와의 동기화 문제**: 서버에서의 데이터 변경 사항을 클라이언트에서 반영할 수 없음                                                                   |
