@@ -8,6 +8,7 @@ import MovieCardList from './MovieCardList'
 import { useSearchStore } from '@/stores/useSearchStore'
 import MovieCardListSkeleton from './MovieCardListSkeleton'
 import { LikedMovie } from '@/types/movies'
+import NoSearchResults from './NoSearchResults'
 
 export default function MovieCardListContainer() {
   const { searchQuery } = useSearchStore()
@@ -41,7 +42,7 @@ export default function MovieCardListContainer() {
     ? (searchMoviesQuery.data ?? []) // 검색 결과
     : (moviesQuery.data?.pages.flatMap((page) => page.movies) ?? []) // 무한 스크롤 결과를 1차원 배열 형태로 저장
 
-  if (!movies.length) return <div>영화 목록을 불러올 수 없습니다.</div>
+  if (!movies.length) return <NoSearchResults />
 
   const getLikedMovies = (): LikedMovie[] => {
     try {

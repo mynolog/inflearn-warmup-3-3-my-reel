@@ -22,6 +22,9 @@ export default function MovieDetail({
     <div className="flex flex-col md:flex-row items-center md:items-start gap-3">
       <div className="w-full md:w-1/3 max-w-sm flex flex-col gap-3">
         <Image src={movie.image_url} priority width={500} height={750} alt={movie.slug} />
+      </div>
+      <div className="w-full md:w-2/3 flex flex-col px-6 gap-4">
+        <h2 className="text-3xl font-extrabold">{movie.title}</h2>
         <div className="flex items-center gap-2 font-bold text-xl">
           {isLiked ? (
             <i
@@ -36,9 +39,6 @@ export default function MovieDetail({
           )}
           <span>{likeCount}</span>
         </div>
-      </div>
-      <div className="w-full md:w-2/3 flex flex-col px-6 gap-4">
-        <h2 className="text-3xl font-extrabold">{movie.title}</h2>
         <p className="text-lg">{movie.overview}</p>
         <div className="overflow-hidden rounded-lg border-2 border-gray-300">
           <table className="w-full border-collapse">
