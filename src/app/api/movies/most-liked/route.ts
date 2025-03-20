@@ -10,7 +10,7 @@ export async function GET(_: Request) {
       .from(TABLES.MOVIES)
       .select('*')
       .order('like_count', { ascending: false })
-      .limit(5)
+      .limit(6)
 
     if (error) {
       return NextResponse.json(

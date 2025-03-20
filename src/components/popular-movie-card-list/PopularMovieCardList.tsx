@@ -11,7 +11,7 @@ export default function PopularMovieCardList({ popularMovies }: PopularMovieCard
   return (
     <div className="w-2/3 flex flex-col gap-2 mx-auto">
       <h3 className="text-xl font-bold">많은 사람들이 좋아하는 영화</h3>
-      <ul className="w-full h-full gap-1 grid grid-cols-5 mx-auto">
+      <ul className="w-full h-full gap-1 grid grid-cols-3 lg:grid-cols-6 mx-auto">
         {popularMovies &&
           popularMovies.map((movie) => <MovieCardContainer key={movie.id} movie={movie} />)}
       </ul>
