@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server'
 
 export async function POST(_: Request, { params }: { params: { slug: string } }) {
   try {
-    const { slug } = await params
+    const { slug } = params
     const supabase = await createServerSupabaseClient()
 
     if (!slug) {

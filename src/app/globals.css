@@ -6,3 +6,6 @@ html,
 body {
   height: 100%;
 }
+.test-red {
+  @apply text-red-500 font-bold text-2xl;
+}

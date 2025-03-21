@@ -26,19 +26,17 @@ export const createServerSupabaseClient = async (
     admin ? SUPABASE_SERVICE_ROLE : SUPABASE_ANON_KEY,
     {
       cookies: {
-        async get(name: string) {
+        get(name: string) {
           try {
-            const resolvedCookies = await cookieStore
-            return resolvedCookies.get(name)?.value
+            return cookieStore.get(name)?.value
           } catch (error) {
             console.error(`쿠키 ${name}을(를) 가져오는 중 오류가 발생했습니다:`, error)
             throw new Error(`쿠키를 가져올 수 없습니다: ${name}`)
           }
         },
-        async set(name: string, value: string, options: CookieOptions) {
+        set(name: string, value: string, options: CookieOptions) {
           try {
-            const resolvedCookies = await cookieStore
-            resolvedCookies.set({ name, value, ...options })
+            cookieStore.set({ name, value, ...options })
           } catch (error) {
             console.error(
               `쿠키 ${name}을(를) 값 ${value}로 설정하는 중 오류가 발생했습니다:`,
@@ -47,10 +45,9 @@ export const createServerSupabaseClient = async (
             throw new Error(`쿠키를 설정할 수 없습니다: ${name}`)
           }
         },
-        async remove(name: string, options: CookieOptions) {
+        remove(name: string, options: CookieOptions) {
           try {
-            const resolvedCookies = await cookieStore
-            resolvedCookies.set({ name, value: '', ...options })
+            cookieStore.set({ name, value: '', ...options })
           } catch (error) {
             console.error(`쿠키 ${name}을(를) 제거하는 중 오류가 발생했습니다:`, error)
             throw new Error(`쿠키를 제거할 수 없습니다: ${name}`)
@@ -59,4 +56,10 @@ export const createServerSupabaseClient = async (
       },
     },
   )
+}
+
+export const createServerSupabaseAdminClient = async (
+  cookieStore: ReturnType<typeof cookies> = cookies(),
+) => {
+  return createServerSupabaseClient(cookieStore, true)
 }

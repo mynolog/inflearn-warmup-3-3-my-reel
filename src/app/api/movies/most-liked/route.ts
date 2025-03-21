@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic' // 빌드시가 아닌 요청시 처리하도록 강제
+
 import { NextResponse } from 'next/server'
 import { createServerSupabaseClient } from '@/utils/supabase/server'
 import { TABLES } from '@/constants/supabase'
@@ -29,5 +31,9 @@ export async function GET(_: Request) {
     return NextResponse.json({ movies })
   } catch (error) {
     console.error(error)
+    return NextResponse.json(
+      { error: ERROR_RESPONSE.SERVER_ERROR.message },
+      { status: ERROR_RESPONSE.SERVER_ERROR.status },
+    )
   }
 }

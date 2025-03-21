@@ -5,7 +5,6 @@ import MovieDetail from './MovieDetail'
 import { useMovieBySlug } from '@/hooks/useMovieBySlug'
 import MovieDetailSkeleton from './MovieDetailSkeleton'
 import { useLikeMovie } from '@/hooks/useLikeMovie'
-import { useEffect, useState } from 'react'
 
 interface MovieDetailContainerProps {
   slug: MovieRow['slug']

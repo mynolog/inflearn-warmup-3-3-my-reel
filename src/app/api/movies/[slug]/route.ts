@@ -5,8 +5,7 @@ import { ERROR_RESPONSE } from '@/constants/error'
 
 export async function GET(_: Request, { params }: { params: { slug: string } }) {
   try {
-    // Next.js 15에서는 params를 비동기적으로 접근해야 함
-    const { slug } = await params
+    const { slug } = params
 
     if (!slug) {
       return NextResponse.json(
