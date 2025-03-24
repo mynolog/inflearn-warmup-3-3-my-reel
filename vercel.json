@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "https://inflearn-warmup-3-3-my-reel.vercel.app/"
+        }
+      ],
+      "destination": "https://todos.mynolog.me/",
+      "permanent": true
+    }
+  ]
+}
