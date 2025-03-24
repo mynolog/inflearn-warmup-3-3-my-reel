@@ -44,7 +44,9 @@ pnpm run dev
 
 [![유튜브 썸네일](https://img.youtube.com/vi/o5BwgEixAbE/0.jpg)](https://www.youtube.com/watch?v=o5BwgEixAbE)
 
-### 🚀 배포 링크
+### 🚀 배포
+
+#### 👉 [배포 링크](https://myreel.mynolog.me/)
 
 ### 🧳 기술 스택
 
